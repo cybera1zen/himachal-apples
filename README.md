@@ -1,5 +1,5 @@
-# Pahadi Seb - Apples of Himachal
+# Pahadi Seb · Orchard Catch
 
-A static, 3D (Three.js) landing page celebrating Himachali apple varieties.
+A 3D apple-catching game set in a Himachal orchard. Three.js from a CDN, static files only.
 
-Live: https://cybera1zen.github.io/himachal-apples/
+Play: https://cybera1zen.github.io/himachal-apples/

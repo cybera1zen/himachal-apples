@@ -2,189 +2,101 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Pahadi Seb · Apples of Himachal</title>
-<meta name="description" content="The apples of Himachal Pradesh - varieties, apple districts and the July to November harvest, from Shimla and Mandi to Kinnaur.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>Pahadi Seb · Orchard Catch</title>
+<meta name="description" content="Pahadi Seb: a 3D apple-catching game set in a Himachal orchard. Catch red and golden apples, dodge the rotten ones.">
 <meta name="theme-color" content="#06080b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E🍎%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<canvas id="scene" aria-hidden="true"></canvas>
-<div class="grain" aria-hidden="true"></div>
+<div class="sky" aria-hidden="true"><div class="moon"></div></div>
+<svg class="ridges" viewBox="0 0 1600 420" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="r1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2531"/><stop offset="1" stop-color="#0c1016"/></linearGradient>
+    <linearGradient id="r2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141b24"/><stop offset="1" stop-color="#090c10"/></linearGradient>
+    <linearGradient id="r3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1218"/><stop offset="1" stop-color="#06080b"/></linearGradient>
+    <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6edf7" stop-opacity=".6"/><stop offset="1" stop-color="#e6edf7" stop-opacity="0"/></linearGradient>
+  </defs>
+  <path fill="url(#r1)" d="M0 250 L120 190 L210 215 L330 120 L420 170 L520 95 L610 150 L720 70 L830 160 L930 110 L1040 175 L1150 85 L1260 150 L1370 105 L1480 170 L1600 130 L1600 420 L0 420Z"/>
+  <path fill="url(#snow)" d="M290 145 L330 120 L372 146 L352 150 L330 138 L310 152Z M480 118 L520 95 L562 122 L540 124 L520 112 L500 126Z M680 94 L720 70 L764 98 L742 100 L720 88 L700 102Z M1110 108 L1150 85 L1192 112 L1170 114 L1150 102 L1130 116Z"/>
+  <path fill="url(#r2)" d="M0 300 L90 260 L200 285 L300 225 L410 270 L500 230 L620 290 L740 215 L860 275 L980 235 L1090 290 L1210 225 L1330 280 L1450 240 L1600 285 L1600 420 L0 420Z"/>
+  <path fill="url(#r3)" d="M0 350 L140 320 L260 345 L400 305 L540 350 L680 318 L820 356 L960 322 L1100 352 L1240 315 L1380 348 L1500 330 L1600 342 L1600 420 L0 420Z"/>
+</svg>
 
-<header class="nav" id="nav">
-  <a class="logo" href="#top"><i></i>Pahadi <span>Seb</span></a>
-  <nav>
-    <a href="#varieties">Varieties</a>
-    <a href="#districts">Districts</a>
-    <a href="#season">Harvest</a>
-  </nav>
+<canvas id="scene" aria-label="Pahadi Seb game"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div id="fx" aria-hidden="true"></div>
+<div class="flash" id="flash" aria-hidden="true"></div>
+
+<!-- HUD -->
+<header class="hud" id="hud" hidden>
+  <div class="hud-left">
+    <div class="score"><span id="score">0</span><small>score</small></div>
+    <div class="combo" id="combo"></div>
+  </div>
+  <div class="hud-mid">
+    <div class="timebar"><i id="timefill"></i></div>
+    <span class="time" id="time">60</span>
+  </div>
+  <div class="hud-right">
+    <div class="lives" id="lives"></div>
+    <button class="icon" id="muteBtn" aria-label="Sound on/off">♪</button>
+    <button class="icon" id="pauseBtn" aria-label="Pause">II</button>
+  </div>
 </header>
 
-<main id="top">
-  <section class="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <div class="hero-copy">
-      <p class="eyebrow fade" style="--d:.1s">Himachal Pradesh · India</p>
-      <h1 class="fade" style="--d:.25s">Pahadi<br><em>Seb.</em></h1>
-      <p class="lede fade" style="--d:.45s">Apples from orchards between 4,000 and 10,000 feet. Cold nights, strong mountain sun, and a harvest that climbs the hills from July to November.</p>
-      <div class="hero-actions fade" style="--d:.6s">
-        <a class="btn primary" href="#varieties">See the varieties</a>
-        <a class="btn ghost" href="#districts">Where they grow</a>
-      </div>
-    </div>
-    <dl class="stats fade" style="--d:.8s">
-      <div><dt>4k - 10k ft</dt><dd>Orchard altitude</dd></div>
-      <div><dt>Jul - Nov</dt><dd>Harvest window</dd></div>
-      <div><dt>6</dt><dd>Apple districts</dd></div>
-    </dl>
-    <svg class="ridges" viewBox="0 0 1600 420" preserveAspectRatio="none" aria-hidden="true">
-      <defs>
-        <linearGradient id="r1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2531"/><stop offset="1" stop-color="#0c1016"/></linearGradient>
-        <linearGradient id="r2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141b24"/><stop offset="1" stop-color="#090c10"/></linearGradient>
-        <linearGradient id="r3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b0f14"/><stop offset="1" stop-color="#06080b"/></linearGradient>
-        <linearGradient id="snowcap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dfe7f2" stop-opacity=".55"/><stop offset="1" stop-color="#dfe7f2" stop-opacity="0"/></linearGradient>
-      </defs>
-      <g class="ridge" data-depth="0.15">
-        <path fill="url(#r1)" d="M0 250 L120 190 L210 215 L330 120 L420 170 L520 95 L610 150 L720 70 L830 160 L930 110 L1040 175 L1150 85 L1260 150 L1370 105 L1480 170 L1600 130 L1600 420 L0 420Z"/>
-      </g>
-      <g class="ridge" data-depth="0.3">
-        <path fill="url(#r2)" d="M0 300 L90 260 L200 285 L300 225 L410 270 L500 230 L620 290 L740 215 L860 275 L980 235 L1090 290 L1210 225 L1330 280 L1450 240 L1600 285 L1600 420 L0 420Z"/>
-      </g>
-      <g class="ridge" data-depth="0.5">
-        <path fill="url(#r3)" d="M0 350 L140 320 L260 345 L400 305 L540 350 L680 318 L820 356 L960 322 L1100 352 L1240 315 L1380 348 L1500 330 L1600 342 L1600 420 L0 420Z"/>
-      </g>
-    </svg>
-    <a class="scroll-hint" href="#varieties" aria-label="Scroll down"><span></span></a>
-  </section>
-
-  <div class="marquee" aria-hidden="true">
-    <div class="track">
-      <span>Royal Delicious</span><b>✦</b><span>Red Delicious</span><b>✦</b><span>Golden Delicious</span><b>✦</b><span>Red Golden</span><b>✦</b><span>Scarlet Spur</span><b>✦</b><span>Super Chief</span><b>✦</b><span>Redlum Gala</span><b>✦</b><span>Jeromine</span><b>✦</b><span>Oregon Spur</span><b>✦</b>
-      <span>Royal Delicious</span><b>✦</b><span>Red Delicious</span><b>✦</b><span>Golden Delicious</span><b>✦</b><span>Red Golden</span><b>✦</b><span>Scarlet Spur</span><b>✦</b><span>Super Chief</span><b>✦</b><span>Redlum Gala</span><b>✦</b><span>Jeromine</span><b>✦</b><span>Oregon Spur</span><b>✦</b>
-    </div>
+<!-- Start -->
+<section class="screen" id="start">
+  <div class="card-ui">
+    <p class="eyebrow">Himachal Pradesh · Orchard Catch</p>
+    <h1>Pahadi<br><em>Seb.</em></h1>
+    <p class="lede">Harvest season is short. Catch as many apples as you can in 60 seconds.</p>
+    <ul class="rules">
+      <li><b class="dot red"></b><span>Red apple</span><em>+1</em></li>
+      <li><b class="dot gold"></b><span>Golden apple</span><em>+5 &amp; +2s</em></li>
+      <li><b class="dot rot"></b><span>Rotten apple</span><em>lose a life</em></li>
+    </ul>
+    <p class="hint">Move the basket with ← → or A / D, the mouse, or drag with your finger. Catch in a row for a combo multiplier.</p>
+    <button class="btn primary" id="startBtn">Tap to start</button>
+    <p class="best" id="bestStart"></p>
   </div>
+</section>
 
-  <section id="varieties" class="section">
-    <div class="section-head reveal">
-      <p class="eyebrow">The orchard</p>
-      <h2>Nine apples<br><em>of the hills</em></h2>
-      <p class="sub">The Delicious family still fills most Himachal orchards. Newer spur and Gala types are coming up fast in high-density plantings.</p>
-    </div>
+<!-- Pause -->
+<section class="screen" id="pause" hidden>
+  <div class="card-ui small">
+    <h2>Paused</h2>
+    <button class="btn primary" id="resumeBtn">Resume</button>
+    <button class="btn ghost" id="quitBtn">Restart</button>
+  </div>
+</section>
 
-    <div class="grid" id="grid">
-      <article class="card reveal" data-apple="royal" style="--c:#c3162f">
-        <div class="apple-wrap"><img alt="Royal Delicious apple" width="220" height="220"></div>
-        <span class="tag">The classic</span>
-        <h3>Royal Delicious</h3>
-        <p>The most grown apple in Himachal. A deeper-red, striped sport of Red Delicious. Sweet, juicy and mild.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, mild</dd></div><div><dt>Harvest</dt><dd>Aug - Oct</dd></div></dl>
-      </article>
+<!-- Game over -->
+<section class="screen" id="over" hidden>
+  <div class="card-ui">
+    <p class="eyebrow" id="overReason">Season over</p>
+    <div class="final"><span id="finalScore">0</span><small>points</small></div>
+    <p class="newbest" id="newBest" hidden>New best!</p>
+    <dl class="stats">
+      <div><dt id="stCaught">0</dt><dd>Apples</dd></div>
+      <div><dt id="stGold">0</dt><dd>Golden</dd></div>
+      <div><dt id="stCombo">0</dt><dd>Best combo</dd></div>
+    </dl>
+    <p class="best" id="bestOver"></p>
+    <button class="btn primary" id="againBtn">Play again</button>
+  </div>
+</section>
 
-      <article class="card reveal" data-apple="red" style="--c:#d8263a">
-        <div class="apple-wrap"><img alt="Red Delicious apple" width="220" height="220"></div>
-        <span class="tag">The original</span>
-        <h3>Red Delicious</h3>
-        <p>The parent of Royal and an old standard of the hill orchards. Tall, bright red and sweet.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, mellow</dd></div><div><dt>Harvest</dt><dd>Aug - Sep</dd></div></dl>
-      </article>
-
-      <article class="card reveal" data-apple="golden" style="--c:#e2bd45">
-        <div class="apple-wrap"><img alt="Golden Delicious apple" width="220" height="220"></div>
-        <span class="tag">Honey gold</span>
-        <h3>Golden Delicious</h3>
-        <p>Yellow-green skin that turns golden as it ripens. Crisp, aromatic, honey-sweet flesh.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Honeyed</dd></div><div><dt>Harvest</dt><dd>Aug - Sep</dd></div></dl>
-      </article>
-
-      <article class="card reveal" data-apple="redgolden" style="--c:#e0703a">
-        <div class="apple-wrap"><img alt="Red Golden apple" width="220" height="220"></div>
-        <span class="tag">Kinnaur favourite</span>
-        <h3>Red Golden</h3>
-        <p>A golden apple with a red cheek. One of the main varieties of the Kinnaur orchards.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Sweet</dd></div><div><dt>Grown</dt><dd>Kinnaur</dd></div></dl>
-      </article>
-
-      <article class="card reveal" data-apple="scarlet" style="--c:#a3122a">
-        <div class="apple-wrap"><img alt="Scarlet Spur apple" width="220" height="220"></div>
-        <span class="tag">Spur type</span>
-        <h3>Scarlet Spur</h3>
-        <p>A spur strain of Red Delicious. Compact trees that suit dense planting, and fruit that colours dark red early.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, firm</dd></div><div><dt>Tree</dt><dd>Compact</dd></div></dl>
-      </article>
-
-      <article class="card reveal" data-apple="chief" style="--c:#8f1024">
-        <div class="apple-wrap"><img alt="Super Chief apple" width="220" height="220"></div>
-        <span class="tag">Spur type</span>
-        <h3>Super Chief</h3>
-        <p>A deep red spur Delicious. Small trees, heavy colour, and a regular pick for new high-density orchards.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, crisp</dd></div><div><dt>Tree</dt><dd>Compact</dd></div></dl>
-      </article>
-
-      <article class="card reveal" data-apple="gala" style="--c:#e0553c">
-        <div class="apple-wrap"><img alt="Redlum Gala apple" width="220" height="220"></div>
-        <span class="tag">Early</span>
-        <h3>Redlum Gala</h3>
-        <p>A Gala strain with red stripes over yellow. Crisp and aromatic, and ripens before the Delicious group.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, fragrant</dd></div><div><dt>Harvest</dt><dd>Early</dd></div></dl>
-      </article>
-
-      <article class="card reveal" data-apple="jeromine" style="--c:#6b0a1d">
-        <div class="apple-wrap"><img alt="Jeromine apple" width="220" height="220"></div>
-        <span class="tag">Dark red</span>
-        <h3>Jeromine</h3>
-        <p>A very dark red Delicious-type apple, planted more and more in new high-density orchards.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Sweet</dd></div><div><dt>Colour</dt><dd>Near burgundy</dd></div></dl>
-      </article>
-
-      <article class="card reveal" data-apple="oregon" style="--c:#c01d33">
-        <div class="apple-wrap"><img alt="Oregon Spur apple" width="220" height="220"></div>
-        <span class="tag">Spur type</span>
-        <h3>Oregon Spur</h3>
-        <p>A red spur Delicious strain with good colour, grown and trialled in the Kullu valley.</p>
-        <dl class="meta"><div><dt>Taste</dt><dd>Sweet</dd></div><div><dt>Tree</dt><dd>Compact</dd></div></dl>
-      </article>
-    </div>
-  </section>
-
-  <section id="districts" class="section">
-    <div class="section-head reveal">
-      <p class="eyebrow">Where they grow</p>
-      <h2>Six districts,<br><em>one mountain crop</em></h2>
-    </div>
-    <div class="districts">
-      <article class="district reveal"><span class="num">01</span><h3>Shimla</h3><p class="places">Kotgarh · Kotkhai · Jubbal · Thanedar</p><p>The heart of Himachal apple country. In 1916 Samuel Stokes planted American Delicious apples at Kotgarh, and the hills changed for good.</p></article>
-      <article class="district reveal"><span class="num">02</span><h3>Kullu</h3><p class="places">Beas valley</p><p>Orchards run along the Beas under pine forest and snow peaks. A key belt for both old Delicious and newer spur strains.</p></article>
-      <article class="district reveal"><span class="num">03</span><h3>Mandi</h3><p class="places">Karsog · Janjehli · Gohar · Sundernagar</p><p>Karsog is Mandi's biggest apple area, followed by Janjehli, Gohar and Sundernagar.</p></article>
-      <article class="district reveal"><span class="num">04</span><h3>Kinnaur</h3><p class="places">Kalpa · Sangla · Reckong Peo</p><p>Orchards above 10,000 ft. Known for sweetness, colour, crunch and long shelf life. The last apples of the season.</p></article>
-      <article class="district reveal"><span class="num">05</span><h3>Chamba</h3><p class="places">Western hills</p><p>A smaller apple district in the west of the state, counted in Himachal's apple area and output.</p></article>
-      <article class="district reveal"><span class="num">06</span><h3>Lahaul-Spiti</h3><p class="places">Cold desert</p><p>Dry, high and cold. Known for quality apples, with high-density orchards now spreading here.</p></article>
-    </div>
-  </section>
-
-  <section id="season" class="section season">
-    <div class="season-inner reveal">
-      <p class="eyebrow">Harvest</p>
-      <h2>The harvest <em>climbs the hills</em></h2>
-      <p class="sub">Picking starts in the lower orchards and moves up with the season. Kinnaur comes in last, from the end of September into November.</p>
-      <ol class="timeline">
-        <li><b>Jul</b><span>Lower orchards start. Early Gala types.</span></li>
-        <li><b>Aug</b><span>Mid hills in full swing. Shimla belt picking.</span></li>
-        <li><b>Sep</b><span>Royal Delicious in season. Higher orchards follow.</span></li>
-        <li><b>Oct - Nov</b><span>Kinnaur and the highest valleys finish.</span></li>
-      </ol>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <p class="foot-logo">Pahadi <em>Seb</em></p>
-  <p>A small tribute to the apples of Himachal Pradesh.</p>
-  <p class="sources">Sources: National Horticulture Board (Kinnaur apples), The Tribune (Mandi apple areas), published Himachal orchard studies.</p>
-</footer>
+<section class="screen" id="nogl" hidden>
+  <div class="card-ui small">
+    <h2>Pahadi <em>Seb.</em></h2>
+    <p class="lede">This game needs 3D graphics (WebGL), which this browser or device has turned off. Try the latest Chrome, Safari or Firefox.</p>
+  </div>
+</section>
 
 <script type="importmap">
 { "imports": {
@@ -192,6 +104,6 @@
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 } }
 </script>
-<script type="module" src="main.js"></script>
+<script type="module" src="game.js"></script>
 </body>
 </html>
