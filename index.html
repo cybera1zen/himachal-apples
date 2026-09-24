@@ -2,164 +2,195 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Pahadi Seb · Apples of Himachal</title>
-<meta name="description" content="A tribute to the apples of Himachal Pradesh - grown on high mountain slopes from Shimla to Kinnaur.">
-<meta name="theme-color" content="#0b0d10">
+<meta name="description" content="The apples of Himachal Pradesh - varieties, apple districts and the July to November harvest, from Shimla and Mandi to Kinnaur.">
+<meta name="theme-color" content="#06080b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <canvas id="scene" aria-hidden="true"></canvas>
 <div class="grain" aria-hidden="true"></div>
 
-<header class="nav">
-  <a class="logo" href="#top">Pahadi<span>Seb</span></a>
+<header class="nav" id="nav">
+  <a class="logo" href="#top"><i></i>Pahadi <span>Seb</span></a>
   <nav>
     <a href="#varieties">Varieties</a>
-    <a href="#valleys">Valleys</a>
-    <a href="#season">Season</a>
+    <a href="#districts">Districts</a>
+    <a href="#season">Harvest</a>
   </nav>
 </header>
 
 <main id="top">
   <section class="hero">
-    <p class="eyebrow">Himachal Pradesh · 2,000 - 3,000 m</p>
-    <h1>Apples that grow<br><em>above the clouds.</em></h1>
-    <p class="lede">Cold nights, bright mountain sun and snow-fed soil. A small tribute to the apples of Shimla, Kullu and Kinnaur.</p>
-    <a class="cta" href="#varieties">Explore the varieties <span>↓</span></a>
-    <div class="scroll-hint" aria-hidden="true"><span></span></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="eyebrow fade" style="--d:.1s">Himachal Pradesh · India</p>
+      <h1 class="fade" style="--d:.25s">Pahadi<br><em>Seb.</em></h1>
+      <p class="lede fade" style="--d:.45s">Apples from orchards between 4,000 and 10,000 feet. Cold nights, strong mountain sun, and a harvest that climbs the hills from July to November.</p>
+      <div class="hero-actions fade" style="--d:.6s">
+        <a class="btn primary" href="#varieties">See the varieties</a>
+        <a class="btn ghost" href="#districts">Where they grow</a>
+      </div>
+    </div>
+    <dl class="stats fade" style="--d:.8s">
+      <div><dt>4k - 10k ft</dt><dd>Orchard altitude</dd></div>
+      <div><dt>Jul - Nov</dt><dd>Harvest window</dd></div>
+      <div><dt>6</dt><dd>Apple districts</dd></div>
+    </dl>
+    <svg class="ridges" viewBox="0 0 1600 420" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="r1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2531"/><stop offset="1" stop-color="#0c1016"/></linearGradient>
+        <linearGradient id="r2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141b24"/><stop offset="1" stop-color="#090c10"/></linearGradient>
+        <linearGradient id="r3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b0f14"/><stop offset="1" stop-color="#06080b"/></linearGradient>
+        <linearGradient id="snowcap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dfe7f2" stop-opacity=".55"/><stop offset="1" stop-color="#dfe7f2" stop-opacity="0"/></linearGradient>
+      </defs>
+      <g class="ridge" data-depth="0.15">
+        <path fill="url(#r1)" d="M0 250 L120 190 L210 215 L330 120 L420 170 L520 95 L610 150 L720 70 L830 160 L930 110 L1040 175 L1150 85 L1260 150 L1370 105 L1480 170 L1600 130 L1600 420 L0 420Z"/>
+      </g>
+      <g class="ridge" data-depth="0.3">
+        <path fill="url(#r2)" d="M0 300 L90 260 L200 285 L300 225 L410 270 L500 230 L620 290 L740 215 L860 275 L980 235 L1090 290 L1210 225 L1330 280 L1450 240 L1600 285 L1600 420 L0 420Z"/>
+      </g>
+      <g class="ridge" data-depth="0.5">
+        <path fill="url(#r3)" d="M0 350 L140 320 L260 345 L400 305 L540 350 L680 318 L820 356 L960 322 L1100 352 L1240 315 L1380 348 L1500 330 L1600 342 L1600 420 L0 420Z"/>
+      </g>
+    </svg>
+    <a class="scroll-hint" href="#varieties" aria-label="Scroll down"><span></span></a>
   </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Royal Delicious</span><b>✦</b><span>Red Delicious</span><b>✦</b><span>Golden Delicious</span><b>✦</b><span>Red Golden</span><b>✦</b><span>Scarlet Spur</span><b>✦</b><span>Super Chief</span><b>✦</b><span>Redlum Gala</span><b>✦</b><span>Jeromine</span><b>✦</b><span>Oregon Spur</span><b>✦</b>
+      <span>Royal Delicious</span><b>✦</b><span>Red Delicious</span><b>✦</b><span>Golden Delicious</span><b>✦</b><span>Red Golden</span><b>✦</b><span>Scarlet Spur</span><b>✦</b><span>Super Chief</span><b>✦</b><span>Redlum Gala</span><b>✦</b><span>Jeromine</span><b>✦</b><span>Oregon Spur</span><b>✦</b>
+    </div>
+  </div>
 
   <section id="varieties" class="section">
     <div class="section-head reveal">
       <p class="eyebrow">The orchard</p>
-      <h2>Nine apples of the hills</h2>
-      <p class="sub">From the classic Royal Delicious to newer spur and Gala types planted in high-density orchards.</p>
+      <h2>Nine apples<br><em>of the hills</em></h2>
+      <p class="sub">The Delicious family still fills most Himachal orchards. Newer spur and Gala types are coming up fast in high-density plantings.</p>
     </div>
 
-    <div class="grid">
-      <article class="card reveal" style="--c1:#b3122b;--c2:#5e0716">
-        <div class="orb"></div>
+    <div class="grid" id="grid">
+      <article class="card reveal" data-apple="royal" style="--c:#c3162f">
+        <div class="apple-wrap"><img alt="Royal Delicious apple" width="220" height="220"></div>
         <span class="tag">The classic</span>
         <h3>Royal Delicious</h3>
-        <p>The apple most people picture when they think of Himachal. Deep red, tall shape, sweet and juicy.</p>
-        <ul><li>Sweet</li><li>Deep red</li><li>Late season</li></ul>
+        <p>The most grown apple in Himachal. A deeper-red, striped sport of Red Delicious. Sweet, juicy and mild.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, mild</dd></div><div><dt>Harvest</dt><dd>Aug - Oct</dd></div></dl>
       </article>
 
-      <article class="card reveal" style="--c1:#d9202f;--c2:#7a0d18">
-        <div class="orb"></div>
-        <span class="tag">Heritage</span>
+      <article class="card reveal" data-apple="red" style="--c:#d8263a">
+        <div class="apple-wrap"><img alt="Red Delicious apple" width="220" height="220"></div>
+        <span class="tag">The original</span>
         <h3>Red Delicious</h3>
-        <p>An old favourite of the hill orchards, with a bright red skin and soft, mellow sweetness.</p>
-        <ul><li>Mild</li><li>Bright red</li><li>Mid season</li></ul>
+        <p>The parent of Royal and an old standard of the hill orchards. Tall, bright red and sweet.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, mellow</dd></div><div><dt>Harvest</dt><dd>Aug - Sep</dd></div></dl>
       </article>
 
-      <article class="card reveal" style="--c1:#e8c44a;--c2:#8a6a12">
-        <div class="orb"></div>
+      <article class="card reveal" data-apple="golden" style="--c:#e2bd45">
+        <div class="apple-wrap"><img alt="Golden Delicious apple" width="220" height="220"></div>
         <span class="tag">Honey gold</span>
         <h3>Golden Delicious</h3>
-        <p>Pale yellow-green skin that turns golden in the sun. Honeyed flavour, crisp and fragrant.</p>
-        <ul><li>Honeyed</li><li>Golden</li><li>Mid season</li></ul>
+        <p>Yellow-green skin that turns golden as it ripens. Crisp, aromatic, honey-sweet flesh.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Honeyed</dd></div><div><dt>Harvest</dt><dd>Aug - Sep</dd></div></dl>
       </article>
 
-      <article class="card reveal" style="--c1:#e0663a;--c2:#8b2a12">
-        <div class="orb"></div>
-        <span class="tag">Kinnaur</span>
+      <article class="card reveal" data-apple="redgolden" style="--c:#e0703a">
+        <div class="apple-wrap"><img alt="Red Golden apple" width="220" height="220"></div>
+        <span class="tag">Kinnaur favourite</span>
         <h3>Red Golden</h3>
-        <p>A blushing golden apple with a red cheek, popular in the high orchards of Kinnaur.</p>
-        <ul><li>Sweet-tart</li><li>Red blush</li><li>High altitude</li></ul>
+        <p>A golden apple with a red cheek. One of the main varieties of the Kinnaur orchards.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Sweet</dd></div><div><dt>Grown</dt><dd>Kinnaur</dd></div></dl>
       </article>
 
-      <article class="card reveal" style="--c1:#9c0f24;--c2:#3f0410">
-        <div class="orb"></div>
+      <article class="card reveal" data-apple="scarlet" style="--c:#a3122a">
+        <div class="apple-wrap"><img alt="Scarlet Spur apple" width="220" height="220"></div>
         <span class="tag">Spur type</span>
         <h3>Scarlet Spur</h3>
-        <p>Compact spur trees with dark, glossy scarlet fruit. Colours early and holds its crunch.</p>
-        <ul><li>Crunchy</li><li>Dark scarlet</li><li>Early colour</li></ul>
+        <p>A spur strain of Red Delicious. Compact trees that suit dense planting, and fruit that colours dark red early.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, firm</dd></div><div><dt>Tree</dt><dd>Compact</dd></div></dl>
       </article>
 
-      <article class="card reveal" style="--c1:#8e1022;--c2:#360510">
-        <div class="orb"></div>
+      <article class="card reveal" data-apple="chief" style="--c:#8f1024">
+        <div class="apple-wrap"><img alt="Super Chief apple" width="220" height="220"></div>
         <span class="tag">Spur type</span>
         <h3>Super Chief</h3>
-        <p>A deep red striped spur apple, grown more and more in new high-density plantings.</p>
-        <ul><li>Firm</li><li>Striped red</li><li>High density</li></ul>
+        <p>A deep red spur Delicious. Small trees, heavy colour, and a regular pick for new high-density orchards.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, crisp</dd></div><div><dt>Tree</dt><dd>Compact</dd></div></dl>
       </article>
 
-      <article class="card reveal" style="--c1:#e2573f;--c2:#8a2416">
-        <div class="orb"></div>
+      <article class="card reveal" data-apple="gala" style="--c:#e0553c">
+        <div class="apple-wrap"><img alt="Redlum Gala apple" width="220" height="220"></div>
         <span class="tag">Early</span>
         <h3>Redlum Gala</h3>
-        <p>A Gala type with red-orange stripes. Small, crisp and aromatic, one of the first to ripen.</p>
-        <ul><li>Aromatic</li><li>Orange-red</li><li>Early season</li></ul>
+        <p>A Gala strain with red stripes over yellow. Crisp and aromatic, and ripens before the Delicious group.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Sweet, fragrant</dd></div><div><dt>Harvest</dt><dd>Early</dd></div></dl>
       </article>
 
-      <article class="card reveal" style="--c1:#6e0a1c;--c2:#26030a">
-        <div class="orb"></div>
-        <span class="tag">Dark beauty</span>
+      <article class="card reveal" data-apple="jeromine" style="--c:#6b0a1d">
+        <div class="apple-wrap"><img alt="Jeromine apple" width="220" height="220"></div>
+        <span class="tag">Dark red</span>
         <h3>Jeromine</h3>
-        <p>An almost burgundy apple with a glossy finish. Newer to the hills and very striking.</p>
-        <ul><li>Juicy</li><li>Burgundy</li><li>New variety</li></ul>
+        <p>A very dark red Delicious-type apple, planted more and more in new high-density orchards.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Sweet</dd></div><div><dt>Colour</dt><dd>Near burgundy</dd></div></dl>
       </article>
 
-      <article class="card reveal" style="--c1:#c21a2e;--c2:#5a0914">
-        <div class="orb"></div>
+      <article class="card reveal" data-apple="oregon" style="--c:#c01d33">
+        <div class="apple-wrap"><img alt="Oregon Spur apple" width="220" height="220"></div>
         <span class="tag">Spur type</span>
         <h3>Oregon Spur</h3>
-        <p>A productive red spur apple with good colour, grown across the mid hills.</p>
-        <ul><li>Balanced</li><li>Red</li><li>Mid hills</li></ul>
+        <p>A red spur Delicious strain with good colour, grown and trialled in the Kullu valley.</p>
+        <dl class="meta"><div><dt>Taste</dt><dd>Sweet</dd></div><div><dt>Tree</dt><dd>Compact</dd></div></dl>
       </article>
     </div>
   </section>
 
-  <section id="valleys" class="section valleys">
+  <section id="districts" class="section">
     <div class="section-head reveal">
       <p class="eyebrow">Where they grow</p>
-      <h2>Three valleys, one taste of the hills</h2>
+      <h2>Six districts,<br><em>one mountain crop</em></h2>
     </div>
-    <div class="valley-row">
-      <div class="valley reveal">
-        <span class="num">01</span>
-        <h3>Shimla</h3>
-        <p>The heart of Himachal apple country. Kotgarh, Thanedar, Jubbal and Kotkhai orchards line the slopes.</p>
-      </div>
-      <div class="valley reveal">
-        <span class="num">02</span>
-        <h3>Kullu</h3>
-        <p>Orchards along the Beas river, framed by pine forest and snow peaks.</p>
-      </div>
-      <div class="valley reveal">
-        <span class="num">03</span>
-        <h3>Kinnaur</h3>
-        <p>High, dry and cold. Apples grown here are known for colour, crunch and long shelf life.</p>
-      </div>
+    <div class="districts">
+      <article class="district reveal"><span class="num">01</span><h3>Shimla</h3><p class="places">Kotgarh · Kotkhai · Jubbal · Thanedar</p><p>The heart of Himachal apple country. In 1916 Samuel Stokes planted American Delicious apples at Kotgarh, and the hills changed for good.</p></article>
+      <article class="district reveal"><span class="num">02</span><h3>Kullu</h3><p class="places">Beas valley</p><p>Orchards run along the Beas under pine forest and snow peaks. A key belt for both old Delicious and newer spur strains.</p></article>
+      <article class="district reveal"><span class="num">03</span><h3>Mandi</h3><p class="places">Karsog · Janjehli · Gohar · Sundernagar</p><p>Karsog is Mandi's biggest apple area, followed by Janjehli, Gohar and Sundernagar.</p></article>
+      <article class="district reveal"><span class="num">04</span><h3>Kinnaur</h3><p class="places">Kalpa · Sangla · Reckong Peo</p><p>Orchards above 10,000 ft. Known for sweetness, colour, crunch and long shelf life. The last apples of the season.</p></article>
+      <article class="district reveal"><span class="num">05</span><h3>Chamba</h3><p class="places">Western hills</p><p>A smaller apple district in the west of the state, counted in Himachal's apple area and output.</p></article>
+      <article class="district reveal"><span class="num">06</span><h3>Lahaul-Spiti</h3><p class="places">Cold desert</p><p>Dry, high and cold. Known for quality apples, with high-density orchards now spreading here.</p></article>
     </div>
   </section>
 
   <section id="season" class="section season">
     <div class="season-inner reveal">
       <p class="eyebrow">Harvest</p>
-      <h2>Picked July to October</h2>
-      <p class="sub">Lower orchards pick first. The highest valleys finish last, when the first snow is close.</p>
-      <div class="timeline">
-        <div><b>Jul</b><span>Early Gala</span></div>
-        <div><b>Aug</b><span>Mid hills</span></div>
-        <div><b>Sep</b><span>Royal peak</span></div>
-        <div><b>Oct</b><span>Kinnaur</span></div>
-      </div>
+      <h2>The harvest <em>climbs the hills</em></h2>
+      <p class="sub">Picking starts in the lower orchards and moves up with the season. Kinnaur comes in last, from the end of September into November.</p>
+      <ol class="timeline">
+        <li><b>Jul</b><span>Lower orchards start. Early Gala types.</span></li>
+        <li><b>Aug</b><span>Mid hills in full swing. Shimla belt picking.</span></li>
+        <li><b>Sep</b><span>Royal Delicious in season. Higher orchards follow.</span></li>
+        <li><b>Oct - Nov</b><span>Kinnaur and the highest valleys finish.</span></li>
+      </ol>
     </div>
   </section>
 </main>
 
 <footer>
-  <p>Pahadi Seb · Made with love for the apples of Himachal</p>
+  <p class="foot-logo">Pahadi <em>Seb</em></p>
+  <p>A small tribute to the apples of Himachal Pradesh.</p>
+  <p class="sources">Sources: National Horticulture Board (Kinnaur apples), The Tribune (Mandi apple areas), published Himachal orchard studies.</p>
 </footer>
 
 <script type="importmap">
-{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
 </script>
 <script type="module" src="main.js"></script>
 </body>
