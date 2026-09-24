@@ -45,7 +45,7 @@ em{font-style:italic;font-weight:300}
 /* floating text */
 #fx{position:fixed;inset:0;pointer-events:none;z-index:4;overflow:hidden}
 .pop{position:absolute;font-family:var(--serif);font-size:26px;font-weight:600;transform:translate(-50%,-50%);animation:pop .9s ease-out forwards;text-shadow:0 2px 14px rgba(0,0,0,.6);white-space:nowrap}
-.pop.red{color:#ff8a95}.pop.gold{color:var(--gold);font-size:32px}.pop.rot{color:#b9a07a}
+.pop.red{color:#ff8a95}.pop.gold{color:var(--gold);font-size:32px}.pop.rot{color:#f0c48a}
 @keyframes pop{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}15%{opacity:1;transform:translate(-50%,-60%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-190%) scale(1)}}
 .flash{position:fixed;inset:0;pointer-events:none;z-index:3;background:radial-gradient(circle at 50% 100%,rgba(224,40,60,.35),transparent 60%);opacity:0}
 .flash.go{animation:flash .45s}
